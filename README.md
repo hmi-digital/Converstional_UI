@@ -16,13 +16,20 @@ The arrival of chatbots have opened up new realms of the customer engagement. So
 Overview
 ------------
 This repo provides you the chatbot engine that you can download and customize to your business needs.
+
 The BOT platform is client-server architecture, client being different channels - browser, mobile App or messenger tools like FaceBook, Slack, MS Teams etc.
+
 The BOT server support REST APIs as well as WebSocket using Jetty Server as a API gateway. 
-![Alt text](Documents/architecture.png?raw=true "Platform Architecture")
-There are three major components of BOT platform - 
-	- DIALOG Engine (DE) – This is core module, and it maintains the state of dialog with the end user
-	- NLP Engine (NE)– This module identifies intent and entities for given user utterances using advanced NLP algorithms
-	- BROKER Engine (BE)– This is communication module and handles messages between DE and NE and uses Kafka based messaging system. 
+
+<img src="https://github.com/hmi-digital/Conversational_UI/blob/master/Conversational_UI/Documents/architecture.png" alt="Platform Architecture"/>
+
+There are three major components of BOT platform -
+
+- DIALOG Engine (DE) – This is core module, and it maintains the state of dialog with the end user
+
+- NLP Engine (NE)– This module identifies intent and entities for given user utterances using advanced NLP algorithms
+
+- BROKER Engine (BE)– This is communication module and handles messages between DE and NE and uses Kafka based messaging system. 
 
 Documents can be found at [this](https://github.com/hmi-digital/Conversational_UI/tree/master/Conversational_UI/Documents) location. Quick Start Guide is easy way to get started.
 
@@ -39,12 +46,14 @@ Download and install **NLP Engine**
 + Clone or download this repo and copy files from Releases to D:/ folder (or your prefered location)
 + Locate NLPEngine folder
 + Ensure that you have following folder structure
-    + config
-    + coreNLP
-    + keys
-    + pubsub
-    + requirements.txt
-    + service.py
+
+     - config
+     - coreNLP
+     - keys
+     - pubsub
+     - requirements.txt
+     - service.py
+     
 + Install all the required python modules from requirements.txt
 
 ```
@@ -67,9 +76,11 @@ Download and install **Dialog Engine**
 ------------------------------------
 + Go to DialogEngine folder 
 + Ensure that you have following folder structure
-    + lib
-    + res
-    + hmi.jar
+     
+     - lib
+     - res
+     - hmi.jar
+     
 + Open command prompt, go to D:\DialogEngine folder and run following command
 ```
 $ java -jar hmi.jar -h
@@ -93,7 +104,3 @@ $ java -jar hmi.jar -i rest –p 8080 -r trip_en
 + Go to chrome browser and enter URL - https://\<Your Machine IP\>:8080/en
   
 Go through the detailed document located [here](https://github.com/hmi-digital/Conversational_UI/tree/master/Conversational_UI/Documents) to understand the different features and functionalities of BOT platform
-
-
-
-

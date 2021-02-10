@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<n:dialog xsi:schemaLocation="http://cto.net/hmi schema1.xsd" 
-	xmlns:n="http://cto.net/hmi/1.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="xyz" company="trial" version="1.0">
+<n:dialog xsi:schemaLocation="http://cto.net/hmi schema1.xsd"
+	xmlns:n="http://cto.net/hmi/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="trip" company="trial" version="1.0">
 	<startTaskName>start</startTaskName>
 	<globalLanguage>es</globalLanguage>
 	<useSODA>true</useSODA>
@@ -13,17 +13,13 @@
 	<tasks>
 		<!--#DO NOT CHANGE System Task. Acts as a starting task for all the conversations -->
 		<task name="start" label="Initial Task">
-			<itos>
-				<ito name="welcome">
-					<AQD>
-						<type>
-							<answerType>open_ended</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="welcome">
+					<answerType>open_ended</answerType>
 					<fallbackQuestion>Como puedo ayudarte? | Qué puedo hacer por ti?</fallbackQuestion>
 					<required>true</required>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<groovyAction>
 					<resultMappings>
@@ -45,48 +41,32 @@
 			</action>
 		</task>
 		<task name="getTripInformation" label="Boleto de libro">
-			<itos>
-				<ito name="getDestinationCity" label="Nombre de la ciudad">
-					<AQD>
-						<type>
-							<answerType>sys.location.city</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="getDestinationCity" label="Nombre de la ciudad">
+					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>a donde quieres ir?|que ciudad quieres viajar?</fallbackQuestion>
 					<clarifyQuestion>Por favor dame el nombre correcto de la ciudad?</clarifyQuestion>
 					<required>true</required>
-				</ito>
-				<ito name="getNumberOfPersons" label="No de personas">
-					<AQD>
-						<type>
-							<answerType>custom.slider_1</answerType>
-						</type>
-					</AQD>
+				</entity>
+				<entity name="getNumberOfPersons" label="No de personas">
+					<answerType>custom.slider_1</answerType>
 					<fallbackQuestion>para cuantas personas?</fallbackQuestion>
 					<clarifyQuestion>Por favor dame la cantidad correcta de personas?</clarifyQuestion>
 					<required>true</required>
-				</ito>
-				<ito name="getStartDate" label="Fecha de inicio">
-					<AQD>
-						<type>
-							<answerType>sys.temporal.date</answerType>
-						</type>
-					</AQD>
+				</entity>
+				<entity name="getStartDate" label="Fecha de inicio">
+					<answerType>sys.temporal.date</answerType>
 					<fallbackQuestion>cuando te quieres ir?</fallbackQuestion>
 					<clarifyQuestion>Por favor, dame la información correcta.</clarifyQuestion>
 					<required>true</required>
-				</ito>
-				<ito name="getClass" label="Clase">
-					<AQD>
-						<type>
-							<answerType>custom.item_1</answerType>
-						</type>
-					</AQD>
+				</entity>
+				<entity name="getClass" label="Clase">
+					<answerType>custom.item_1</answerType>
 					<fallbackQuestion>en cual clase quieres viajar?</fallbackQuestion>
 					<clarifyQuestion>Es business, economic o first??</clarifyQuestion>
 					<required>true</required>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<groovyAction>
 					<returnAnswer>true</returnAnswer>
@@ -99,18 +79,14 @@
 			</action>
 		</task>
 		<task name="getWeatherInformation" label="Información meteorológica">
-			<itos>
-				<ito name="getDestinationCity" label="Nombre de la ciudad">
-					<AQD>
-						<type>
-							<answerType>sys.location.city</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="getDestinationCity" label="Nombre de la ciudad">
+					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>Para qué ciudad quieres saber el clima?</fallbackQuestion>
 					<required>true</required>
 					<clearContext>true</clearContext>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<httpAction>
 					<returnAnswer>true</returnAnswer>
@@ -123,15 +99,11 @@
 				</httpAction>
 			</action>
 			<followup>
-				<ito name="anotherOne" label="Otra ciudad">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+				<entity name="anotherOne" label="Otra ciudad">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>quieres saber sobre otras ciudades?</fallbackQuestion>
 					<required>true</required>
-				</ito>
+				</entity>
 				<answerMapping>
 					<item key="YES">getWeatherInformation</item>
 				</answerMapping>
@@ -139,17 +111,13 @@
 		</task>
 		<task name="getWikipediaCityInfo" label="Información de la ciudad">
 			<selector></selector>
-			<itos>
-				<ito name="getWikiCity" label="Nombre de la ciudad">
-					<AQD>
-						<type>
-							<answerType>sys.location.city</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="getWikiCity" label="Nombre de la ciudad">
+					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>Qué ciudad quieres saber más sobre?</fallbackQuestion>
 					<required>true</required>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<httpAction>
 					<returnAnswer>true</returnAnswer>
@@ -162,15 +130,11 @@
 				</httpAction>
 			</action>
 			<followup>
-				<ito name="anotherOne" label="Otra ciudad">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+				<entity name="anotherOne" label="Otra ciudad">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>quieres saber sobre otras ciudades?</fallbackQuestion>
 					<required>true</required>
-				</ito>
+				</entity>
 				<answerMapping>
 					<item key="YES">getWikipediaCityInfo</item>
 				</answerMapping>
@@ -179,15 +143,11 @@
 		<!--#DO NOT CHANGE System Task. Invoked when user explicitly wants to cancel the task -->
 		<task name="cancelTask" label="cancelar">
 			<followup>
-				<ito name="cancelDecision" label="Opciones">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+				<entity name="cancelDecision" label="Opciones">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>Quieres cancelar la tarea?</fallbackQuestion>
 					<required>true</required>
-				</ito>
+				</entity>
 				<answerMapping>
 					<item key="YES">start</item>
 				</answerMapping>
@@ -202,17 +162,13 @@
 		</task>
 		<!--#DO NOT CHANGE System Task. Invoked whenever there is two consecutive failed attempts in answering ITO -->
 		<task name="helpTask">
-			<itos>
-				<ito name="helpDecision" label="Opciones">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="helpDecision" label="Opciones">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>Parece que no tienes claro esto. Diga YES si desea cancelar esta tarea o NO para continuar!</fallbackQuestion>
 					<required>true</required>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<groovyAction>
 					<resultMappings>
@@ -248,17 +204,13 @@
 		</task>
 		<!--#DO NOT CHANGE System Task. Invoked whenever number of failed attempts exceeds ALLOWED_FAILURE_ATTEMPTS -->
 		<task name="handoverTask">
-			<itos>
-				<ito name="handoverDecision" label="Opciones">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+			<entities>
+				<entity name="handoverDecision" label="Opciones">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>Necesita ayuda de un agente? diga YES para chatear con nuestro agente o para reiniciar, diga NO para continuar!</fallbackQuestion>
 					<required>true</required>
-				</ito>
-			</itos>
+				</entity>
+			</entities>
 			<action>
 				<groovyAction>
 					<resultMappings>
@@ -295,15 +247,11 @@
 		<!--#DO NOT CHANGE System Task. Invoked whenever user says bye , bye bye or exit at start task -->
 		<task name="exitTask">
 			<followup>
-				<ito name="LogoutDecision" label="Cerrar sesión">
-					<AQD>
-						<type>
-							<answerType>sys.decision</answerType>
-						</type>
-					</AQD>
+				<entity name="LogoutDecision" label="Cerrar sesión">
+					<answerType>sys.decision</answerType>
 					<fallbackQuestion>quieres desconectarte?</fallbackQuestion>
 					<required>true</required>
-				</ito>
+				</entity>
 				<answerMapping>
 					<item key="NO">start</item>
 				</answerMapping>

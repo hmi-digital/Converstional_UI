@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<n:dialog xsi:schemaLocation="http://cto.net/hmi schema1.xsd" xmlns:n="http://cto.net/hmi/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-name="trip" company="trial" version="1.0">
+<n:dialog xsi:schemaLocation="http://cto.net/hmi schema1.xsd"
+    xmlns:n="http://cto.net/hmi/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="trip" company="trial" version="1.0">
     <startTaskName>start</startTaskName>
     <globalLanguage>en</globalLanguage>
     <useSODA>true</useSODA>
@@ -12,17 +13,13 @@ name="trip" company="trial" version="1.0">
     <tasks>
         <!--#DO NOT CHANGE System Task. Acts as a starting task for all the conversations -->
         <task name="start" label="Initial Task">
-            <itos>
-                <ito name="welcome">
-                    <AQD>
-                        <type>
-                            <answerType>open_ended</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="welcome">
+                    <answerType>open_ended</answerType>
                     <fallbackQuestion>How may I help you? | What can I do for you?</fallbackQuestion>
                     <required>true</required>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <groovyAction>
                     <resultMappings>
@@ -44,48 +41,32 @@ name="trip" company="trial" version="1.0">
             </action>
         </task>
         <task name="getTripInformation" label="Book ticket" role="user">
-            <itos>
-                <ito name="getDestinationCity" label="City Name">
-                    <AQD>
-                        <type>
-                            <answerType>sys.location.city</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="getDestinationCity" label="City Name">
+                    <answerType>sys.location.city</answerType>
                     <fallbackQuestion>where do you want to go?|what city do you want to travel?</fallbackQuestion>
                     <clarifyQuestion>Please provide me with the correct city name?</clarifyQuestion>
                     <required>true</required>
-                </ito>
-                <ito name="getNumberOfPersons" label="No of persons">
-                    <AQD>
-                        <type>
-                            <answerType>custom.slider_1</answerType>
-                        </type>
-                    </AQD>
+                </entity>
+                <entity name="getNumberOfPersons" label="No of persons">
+                    <answerType>custom.slider_1</answerType>
                     <fallbackQuestion>for how many persons?</fallbackQuestion>
                     <clarifyQuestion>Please provide me with the correct number of persons?</clarifyQuestion>
                     <required>true</required>
-                </ito>
-                <ito name="getStartDate" label="Start Date">
-                    <AQD>
-                        <type>
-                            <answerType>sys.temporal.date</answerType>
-                        </type>
-                    </AQD>
+                </entity>
+                <entity name="getStartDate" label="Start Date">
+                    <answerType>sys.temporal.date</answerType>
                     <fallbackQuestion>when do you want to leave?</fallbackQuestion>
                     <clarifyQuestion>Please provide me correct information e.g. tomorrow, friday etc.?</clarifyQuestion>
                     <required>true</required>
-                </ito>
-                <ito name="getClass" label="Class">
-                    <AQD>
-                        <type>
-                            <answerType>custom.item_1</answerType>
-                        </type>
-                    </AQD>
+                </entity>
+                <entity name="getClass" label="Class">
+                    <answerType>custom.item_1</answerType>
                     <fallbackQuestion>which class do you want to travel?</fallbackQuestion>
                     <clarifyQuestion>Is it business , economic or first?</clarifyQuestion>
                     <required>true</required>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <groovyAction>
                     <returnAnswer>true</returnAnswer>
@@ -99,19 +80,15 @@ name="trip" company="trial" version="1.0">
             </action>
         </task>
         <task name="getWeatherInformation" label="Weather information">
-            <itos>
-                <ito name="getDestinationCity" label="Weather information">
-                    <AQD>
-                        <type>
-                            <answerType>sys.location.city</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="getDestinationCity" label="Weather information">
+                    <answerType>sys.location.city</answerType>
                     <fallbackQuestion>for which city do you want to know the weather?</fallbackQuestion>
                     <required>true</required>
                     <useContext>true</useContext>
                     <clearContext>true</clearContext>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <httpAction>
                     <returnAnswer>true</returnAnswer>
@@ -124,32 +101,24 @@ name="trip" company="trial" version="1.0">
                 </httpAction>
             </action>
             <followup>
-                <ito name="anotherOne" label="Another City">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+                <entity name="anotherOne" label="Another City">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>do you want to know about other cities?</fallbackQuestion>
                     <required>true</required>
-                </ito>
+                </entity>
                 <answerMapping>
                     <item key="YES">getWeatherInformation</item>
                 </answerMapping>
             </followup>
         </task>
         <task name="getWikipediaCityInfo" label="City information">
-            <itos>
-                <ito name="getWikiCity" label="City Name">
-                    <AQD>
-                        <type>
-                            <answerType>sys.location.city</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="getWikiCity" label="City Name">
+                    <answerType>sys.location.city</answerType>
                     <fallbackQuestion>what city do you want to know more about?</fallbackQuestion>
                     <required>true</required>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <httpAction>
                     <returnAnswer>true</returnAnswer>
@@ -162,15 +131,11 @@ name="trip" company="trial" version="1.0">
                 </httpAction>
             </action>
             <followup>
-                <ito name="anotherOne" label="Another City">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+                <entity name="anotherOne" label="Another City">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>do you want to know about other cities?</fallbackQuestion>
                     <required>true</required>
-                </ito>
+                </entity>
                 <answerMapping>
                     <item key="YES">getWikipediaCityInfo</item>
                 </answerMapping>
@@ -179,15 +144,11 @@ name="trip" company="trial" version="1.0">
         <!--#DO NOT CHANGE System Task. Invoked when user explicitly wants to cancel the task -->
         <task name="cancelTask" label="Cancel">
             <followup>
-                <ito name="cancelDecision" label="Option">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+                <entity name="cancelDecision" label="Option">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>do you want to cancel the task?</fallbackQuestion>
                     <required>true</required>
-                </ito>
+                </entity>
                 <answerMapping>
                     <item key="YES">start</item>
                 </answerMapping>
@@ -202,17 +163,13 @@ name="trip" company="trial" version="1.0">
         </task>
         <!--#DO NOT CHANGE System Task. Invoked whenever there is two consecutive failed attempts in answering ITO -->
         <task name="helpTask">
-            <itos>
-                <ito name="helpDecision" label="Option">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="helpDecision" label="Option">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>Seems you are not clear on this. Say Yes if you want to cancel this task or No to continue !</fallbackQuestion>
                     <required>true</required>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <groovyAction>
                     <resultMappings>
@@ -249,17 +206,13 @@ name="trip" company="trial" version="1.0">
         </task>
         <!--#DO NOT CHANGE System Task. Invoked whenever number of failed attempts exceeds ALLOWED_FAILURE_ATTEMPTS -->
         <task name="handoverTask">
-            <itos>
-                <ito name="handoverDecision" label="Option">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+            <entities>
+                <entity name="handoverDecision" label="Option">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>Do you need any agent assistance, say Yes to chat with our agent or to restart, say No to continue !</fallbackQuestion>
                     <required>true</required>
-                </ito>
-            </itos>
+                </entity>
+            </entities>
             <action>
                 <groovyAction>
                     <resultMappings>
@@ -297,15 +250,11 @@ name="trip" company="trial" version="1.0">
         <!--#DO NOT CHANGE System Task. Invoked whenever user says bye , bye bye or exit at start task -->
         <task name="exitTask">
             <followup>
-                <ito name="LogoutDecision" label="Logout">
-                    <AQD>
-                        <type>
-                            <answerType>sys.decision</answerType>
-                        </type>
-                    </AQD>
+                <entity name="LogoutDecision" label="Logout">
+                    <answerType>sys.decision</answerType>
                     <fallbackQuestion>do you want to logout?</fallbackQuestion>
                     <required>true</required>
-                </ito>
+                </entity>
                 <answerMapping>
                     <item key="NO">start</item>
                 </answerMapping>
