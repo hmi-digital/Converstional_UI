@@ -4,8 +4,8 @@ tasks :
     - task :
             name : EVT_getTemprature
             label : Temprature
-            itos :
-                - ito :
+            entities :
+                - entity :
                     name : getCityName
                     label : 'City Name'
                     required : true

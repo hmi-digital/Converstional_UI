@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-destinationCity",
+      "2": "I-destinationCity",
+      "3": "L-destinationCity",
+      "4": "U-destinationCity",
+      "5": "B-startDate",
+      "6": "I-startDate",
+      "7": "L-startDate",
+      "8": "U-startDate",
+      "9": "B-travelClass",
+      "10": "I-travelClass",
+      "11": "L-travelClass",
+      "12": "U-travelClass",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-destinationCity": 1,
+      "I-destinationCity": 2,
+      "L-destinationCity": 3,
+      "U-destinationCity": 4,
+      "B-startDate": 5,
+      "I-startDate": 6,
+      "L-startDate": 7,
+      "U-startDate": 8,
+      "B-travelClass": 9,
+      "I-travelClass": 10,
+      "L-travelClass": 11,
+      "U-travelClass": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

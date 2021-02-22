@@ -42,22 +42,22 @@
 		</task>
 		<task name="getTripInformation" label="टिकट बुकिंग">
 			<entities>
-				<entity name="getDestinationCity" label="गंतव्य शहर">
+				<entity name="destinationCity" label="गंतव्य शहर">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>आप कहाँ जाना चाहते हैं ?</fallbackQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getNumberOfPersons" label="व्यक्तियों की संख्या">
+				<entity name="numberOfPersons" label="व्यक्तियों की संख्या">
 					<answerType>custom.slider_1</answerType>
 					<fallbackQuestion>कितने व्यक्ति यात्रा करना चाहते हैं ?</fallbackQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getStartDate" label="प्रारंभ की तारीख">
+				<entity name="startDate" label="प्रारंभ की तारीख">
 					<answerType>sys.temporal.date</answerType>
 					<fallbackQuestion>आप कब जाना चाहते हैं ?</fallbackQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getClass" label="श्रेणी">
+				<entity name="travelClass" label="श्रेणी">
 					<answerType>custom.item_1</answerType>
 					<fallbackQuestion>आप किस श्रेणी से यात्रा करना चाहते हैं?</fallbackQuestion>
 					<required>true</required>
@@ -66,7 +66,7 @@
 			<action>
 				<groovyAction>
 					<returnAnswer>true</returnAnswer>
-					<utteranceTemplate>जॉन , इस %getDestinationCity की यात्रा के लिए आपको #price डॉलर का खर्च आएगा ।</utteranceTemplate>
+					<utteranceTemplate>जॉन , इस %destinationCity की यात्रा के लिए आपको #price डॉलर का खर्च आएगा ।</utteranceTemplate>
 					<code><![CDATA[
                         executionResults.put("price","255")
                         ]]>
@@ -76,7 +76,7 @@
 		</task>
 		<task name="getWeatherInformation" label="मौसम की जानकारी">
 			<entities>
-				<entity name="getDestinationCity" label="शहर का नाम">
+				<entity name="destinationCity" label="शहर का नाम">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>किस शहर के लिए आप मौसम जानना चाहते हैं ?</fallbackQuestion>
 					<required>true</required>
@@ -86,9 +86,9 @@
 			<action>
 				<httpAction>
 					<returnAnswer>true</returnAnswer>
-					<utteranceTemplate>%getDestinationCity में तापमान #result डिग्री है ।</utteranceTemplate>
+					<utteranceTemplate>%destinationCity में तापमान #result डिग्री है ।</utteranceTemplate>
 					<method>get</method>
-					<params>q=%getDestinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
+					<params>q=%destinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
 					<url>http://api.openweathermap.org/data/2.5/weather</url>
 					<xpath>/current/temperature/@value</xpath>
 					<jpath></jpath>
@@ -107,7 +107,7 @@
 		</task>
 		<task name="getWikipediaCityInfo" label="शहर की जानकारी">
 			<entities>
-				<entity name="getWikiCity" label="शहर का नाम">
+				<entity name="destinationCity" label="शहर का नाम">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>आप किस शहर की जानकारी चाहते हैं ?</fallbackQuestion>
 					<required>true</required>
@@ -118,7 +118,7 @@
 					<returnAnswer>true</returnAnswer>
 					<utteranceTemplate>#result</utteranceTemplate>
 					<method>get</method>
-					<params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%getWikiCity</params>
+					<params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%destinationCity</params>
 					<url>http://en.wikipedia.org/w/api.php</url>
 					<xpath></xpath>
 					<jpath>$..extract</jpath>

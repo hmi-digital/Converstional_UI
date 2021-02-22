@@ -42,22 +42,22 @@
         </task>
         <task name="getTripInformation" label="تذكرة الكتاب">
             <entities>
-                <entity name="getDestinationCity" label="المدينة الوجهة">
+                <entity name="destinationCity" label="المدينة الوجهة">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>أين تريد أن تذهب؟</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getNumberOfPersons" label="عدد الاشخاص">
+                <entity name="numberOfPersons" label="عدد الاشخاص">
                     <answerType>custom.slider_1</answerType>
                     <fallbackQuestion>لكم من الأشخاص ؟</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getStartDate" label="تاريخ البدء">
+                <entity name="startDate" label="تاريخ البدء">
                     <answerType>sys.temporal.date</answerType>
                     <fallbackQuestion>متى تريد أن تبدأ ؟</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getClass" label="صف دراسي">
+                <entity name="travelClass" label="صف دراسي">
                     <answerType>custom.item_1</answerType>
                     <fallbackQuestion>في أي صف تريد السفر؟</fallbackQuestion>
                     <required>true</required>
@@ -73,7 +73,7 @@
         </task>
         <task name="getWeatherInformation" label="معلومات الطقس">
             <entities>
-                <entity name="getDestinationCity" label="اسم المدينة">
+                <entity name="destinationCity" label="اسم المدينة">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>المدينة التي تريد أن تعرف الطقس؟</fallbackQuestion>
                     <required>true</required>
@@ -85,7 +85,7 @@
                     <returnAnswer>true</returnAnswer>
                     <utteranceTemplate>#result المعبد في المدينة</utteranceTemplate>
                     <method>get</method>
-                    <params>q=%getDestinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
+                    <params>q=%destinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
                     <url>http://api.openweathermap.org/data/2.5/weather</url>
                     <xpath>/current/temperature/@value</xpath>
                     <jpath></jpath>
@@ -94,7 +94,7 @@
         </task>
         <task name="getWikipediaCityInfo" label="معلومات المدينة">
             <entities>
-                <entity name="getWikiCity" label="اسم المدينة">
+                <entity name="destinationCity" label="اسم المدينة">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>لأي مدينة تريد أن تعرف الطقس؟</fallbackQuestion>
                     <required>true</required>
@@ -105,7 +105,7 @@
                     <returnAnswer>true</returnAnswer>
                     <utteranceTemplate>#result</utteranceTemplate>
                     <method>get</method>
-                    <params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%getWikiCity</params>
+                    <params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%destinationCity</params>
                     <url>http://en.wikipedia.org/w/api.php</url>
                     <xpath></xpath>
                     <jpath>$..extract</jpath>

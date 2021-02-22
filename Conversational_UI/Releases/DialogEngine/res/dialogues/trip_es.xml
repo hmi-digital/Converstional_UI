@@ -42,25 +42,25 @@
 		</task>
 		<task name="getTripInformation" label="Boleto de libro">
 			<entities>
-				<entity name="getDestinationCity" label="Nombre de la ciudad">
+				<entity name="destinationCity" label="Nombre de la ciudad">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>a donde quieres ir?|que ciudad quieres viajar?</fallbackQuestion>
 					<clarifyQuestion>Por favor dame el nombre correcto de la ciudad?</clarifyQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getNumberOfPersons" label="No de personas">
+				<entity name="numberOfPersons" label="No de personas">
 					<answerType>custom.slider_1</answerType>
 					<fallbackQuestion>para cuantas personas?</fallbackQuestion>
 					<clarifyQuestion>Por favor dame la cantidad correcta de personas?</clarifyQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getStartDate" label="Fecha de inicio">
+				<entity name="startDate" label="Fecha de inicio">
 					<answerType>sys.temporal.date</answerType>
 					<fallbackQuestion>cuando te quieres ir?</fallbackQuestion>
 					<clarifyQuestion>Por favor, dame la información correcta.</clarifyQuestion>
 					<required>true</required>
 				</entity>
-				<entity name="getClass" label="Clase">
+				<entity name="travelClass" label="Clase">
 					<answerType>custom.item_1</answerType>
 					<fallbackQuestion>en cual clase quieres viajar?</fallbackQuestion>
 					<clarifyQuestion>Es business, economic o first??</clarifyQuestion>
@@ -70,7 +70,7 @@
 			<action>
 				<groovyAction>
 					<returnAnswer>true</returnAnswer>
-					<utteranceTemplate>Oye %loginUser_ , este viaje a %getDestinationCity cuesta #price dólares.</utteranceTemplate>
+					<utteranceTemplate>Oye %loginUser_ , este viaje a %destinationCity cuesta #price dólares.</utteranceTemplate>
 					<code><![CDATA[
                             executionResults.put("price","255")
                             ]]>
@@ -80,7 +80,7 @@
 		</task>
 		<task name="getWeatherInformation" label="Información meteorológica">
 			<entities>
-				<entity name="getDestinationCity" label="Nombre de la ciudad">
+				<entity name="destinationCity" label="Nombre de la ciudad">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>Para qué ciudad quieres saber el clima?</fallbackQuestion>
 					<required>true</required>
@@ -90,9 +90,9 @@
 			<action>
 				<httpAction>
 					<returnAnswer>true</returnAnswer>
-					<utteranceTemplate>La temperatura en %getDestinationCity es de #result grados.</utteranceTemplate>
+					<utteranceTemplate>La temperatura en %destinationCity es de #result grados.</utteranceTemplate>
 					<method>get</method>
-					<params>q=%getDestinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
+					<params>q=%destinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
 					<url>http://api.openweathermap.org/data/2.5/weather</url>
 					<xpath>/current/temperature/@value</xpath>
 					<jpath></jpath>
@@ -110,9 +110,8 @@
 			</followup>
 		</task>
 		<task name="getWikipediaCityInfo" label="Información de la ciudad">
-			<selector></selector>
 			<entities>
-				<entity name="getWikiCity" label="Nombre de la ciudad">
+				<entity name="destinationCity" label="Nombre de la ciudad">
 					<answerType>sys.location.city</answerType>
 					<fallbackQuestion>Qué ciudad quieres saber más sobre?</fallbackQuestion>
 					<required>true</required>
@@ -123,7 +122,7 @@
 					<returnAnswer>true</returnAnswer>
 					<utteranceTemplate>#result</utteranceTemplate>
 					<method>get</method>
-					<params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%getWikiCity</params>
+					<params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%destinationCity</params>
 					<url>http://en.wikipedia.org/w/api.php</url>
 					<xpath></xpath>
 					<jpath>$..extract</jpath>

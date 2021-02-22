@@ -4,20 +4,20 @@ tasks :
     - task :
             name : EVT_getBooking
             label : 'Ticket Booking'
-            itos :
-                - ito :
+            entities :
+                - entity :
                     name : getDepartureCity
                     label : 'Departure city'
                     required : true
                     answerType: sys.location.city
                     fallbackQuestion: "where do you want to go?"
-                - ito :
+                - entity :
                     name : getDate
                     label : 'Departure Date'
                     required : true
                     answerType: sys.temporal.date
                     fallbackQuestion: "when do you want to leave?"
-                - ito :
+                - entity :
                     name : getInfo
                     label : 'Addition Info'
                     required : true
@@ -38,8 +38,8 @@ tasks :
     - task :
             name : EVT_getTemprature
             label : 'City Temprature'
-            itos :
-                - ito :
+            entities :
+                - entity :
                     name : getCityName
                     label : 'City Name'
                     required : true

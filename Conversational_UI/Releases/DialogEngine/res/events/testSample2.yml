@@ -4,15 +4,15 @@ tasks :
     - task :
         name : EVT_getFeedback
         label : Feedback
-        itos :
-            - ito :
+        entities :
+            - entity :
                 name : getConfirmation
                 label : Confirmation
                 required : true
                 useContext : true
                 answerType: sys.decision
                 fallbackQuestion: "if BOT was able to answer to your query?"
-            - ito :
+            - entity :
                 name : getRating
                 label : Rating
                 required : true
@@ -24,7 +24,7 @@ tasks :
             utteranceTemplate : "#msg"
             code : 'executionResults.put("msg","Thank you for your feedback.")'
         followup :
-            ito :
+            entity :
                 name : anotherOne
                 label : 'More feedback'
                 required : true

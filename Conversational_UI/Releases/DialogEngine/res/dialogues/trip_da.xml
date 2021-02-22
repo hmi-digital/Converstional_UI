@@ -42,22 +42,22 @@
         </task>
         <task name="getTripInformation" label="Bog billet">
             <entities>
-                <entity name="getDestinationCity" label="Bynavn">
+                <entity name="destinationCity" label="Bynavn">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>hvor vil du hen?</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getNumberOfPersons" label="Antal personer">
+                <entity name="numberOfPersons" label="Antal personer">
                     <answerType>custom.slider_1</answerType>
                     <fallbackQuestion>for hvor mange personer?</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getStartDate" label="Start dato">
+                <entity name="startDate" label="Start dato">
                     <answerType>sys.temporal.date</answerType>
                     <fallbackQuestion>hvornår vil du forlade?</fallbackQuestion>
                     <required>true</required>
                 </entity>
-                <entity name="getClass" label="Klasse">
+                <entity name="travelClass" label="Klasse">
                     <answerType>custom.item_1</answerType>
                     <fallbackQuestion>hvilken klasse vil du gerne rejse?</fallbackQuestion>
                     <required>true</required>
@@ -66,14 +66,14 @@
             <action>
                 <groovyAction>
                     <returnAnswer>true</returnAnswer>
-                    <utteranceTemplate>Hey %loginUser_, denne rejse til %getDestinationCity koster 255 Euros.</utteranceTemplate>
+                    <utteranceTemplate>Hey %loginUser_, denne rejse til %destinationCity koster 255 Euros.</utteranceTemplate>
                     <code><![CDATA[executionResults.put("price","255")]]></code>
                 </groovyAction>
             </action>
         </task>
         <task name="getWeatherInformation" label="Vejrinformation">
             <entities>
-                <entity name="getDestinationCity" label="Bynavn">
+                <entity name="destinationCity" label="Bynavn">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>i hvilken by vil du vide vejret?</fallbackQuestion>
                     <required>true</required>
@@ -83,9 +83,9 @@
             <action>
                 <httpAction>
                     <returnAnswer>true</returnAnswer>
-                    <utteranceTemplate>Temperaturen i %getDestinationCity er #result grader.</utteranceTemplate>
+                    <utteranceTemplate>Temperaturen i %destinationCity er #result grader.</utteranceTemplate>
                     <method>get</method>
-                    <params>q=%getDestinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
+                    <params>q=%destinationCity&amp;mode=xml&amp;units=metric&amp;APPID=706120eb0f11f2ebf8584dadb9bad3d6</params>
                     <url>http://api.openweathermap.org/data/2.5/weather</url>
                     <xpath>/current/temperature/@value</xpath>
                     <jpath></jpath>
@@ -94,7 +94,7 @@
         </task>
         <task name="getWikipediaCityInfo" label="Byinformation">
             <entities>
-                <entity name="getWikiCity" label="Bynavn">
+                <entity name="destinationCity" label="Bynavn">
                     <answerType>sys.location.city</answerType>
                     <fallbackQuestion>hvilken by vil du vide mere om?</fallbackQuestion>
                     <required>true</required>
@@ -105,7 +105,7 @@
                     <returnAnswer>true</returnAnswer>
                     <utteranceTemplate>#result</utteranceTemplate>
                     <method>get</method>
-                    <params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%getWikiCity</params>
+                    <params>format=json&amp;action=query&amp;prop=extracts&amp;explaintext&amp;exsentences=1&amp;titles=%destinationCity</params>
                     <url>http://en.wikipedia.org/w/api.php</url>
                     <xpath></xpath>
                     <jpath>$..extract</jpath>

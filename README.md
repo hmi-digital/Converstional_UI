@@ -39,7 +39,7 @@ This system was implemented and tested under Windows, Linux and Mac OS X with th
 
 + Ubuntu 14.10.4 / Mac OS X 10.10 / Windows 10
 + OpenJDK 15 or higher (all system variables are set JAVA_HOME etc.) This should work on Java JDK 1.8 but not tested.
-+ Python 3.8 or higher
++ Python 3.6 or higher (do not use 3.9 as rasa does not support it)
 
 Download and install **NLP Engine**
 ---------------------------------
@@ -48,16 +48,18 @@ Download and install **NLP Engine**
 + Ensure that you have following folder structure
 
      - config
-     - coreNLP
+     - core
      - keys
      - pubsub
+     - trainingData
+     - utils
      - requirements.txt
-     - service.py
+     - app.py
      
 + Install all the required python modules from requirements.txt
 
 ```
-$ python -m install pip install -r ./requirements.txt
+$ python -m pip install -r ./requirements.txt
 ```
 + Download NLTK data
 ```
@@ -67,9 +69,15 @@ $ python
 >>> nltk.download('stopwords')
 >>> exit()
 ```
++ Download Spacy data
+```
+$ python -m spacy download en_core_web_md
+$ python -m spacy link en_core_web_md en          (Ignore - DeprecationWarning)
+$ python -m spacy validate
+```
 +  Run **NLP Engine** 
 ```
-$ python service.py
+$ python app.py
 ```
 
 Download and install **Dialog Engine**
